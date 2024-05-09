@@ -13,19 +13,19 @@ export class UsersController {
 
   @Get()
   listUsers(@Query() query: ListUsersQueryDto) {
-    const users = this._usersService.listUsers();
+    const users = this._usersService.listUsers(query);
     return users;
   }
 
   @Get(':id')
   getUser(@Query('id') id: string) {
-    const users = this._usersService.listUsers();
+    const users = this._usersService.listUsers({ id });
     return users;
   }
 
   @Get(':id/reset-password')
   resetUserPassword(@Body() body: ResetUserPasswordBodyDto) {
-    const users = this._usersService.listUsers();
+    const users = this._usersService.listUsers(body);
     return users;
   }
 
