@@ -1,9 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-export const createStringValidator = (
-  name: string,
-  options?: { minLength?: number; maxLength?: number },
-) => {
+export const createStringValidator = (name: string, options?: { minLength?: number; maxLength?: number }) => {
   let validator = z.string({
     invalid_type_error: `${name} must be a string`,
     required_error: `${name} is required`,
@@ -19,9 +16,15 @@ export const createStringValidator = (
   return validator;
 };
 
+export const createUUIDValidator = (name: string) => {
+  return createStringValidator(name).uuid({
+    message: `${name} must be a valid UUID`,
+  });
+};
+
 export const createNumberValidator = (
   name: string,
-  options?: { min?: number; max?: number },
+  options?: { min?: number; max?: number; isInt?: boolean; isPositive?: boolean }
 ) => {
   let validator = z.number({
     invalid_type_error: `${name} must be a number`,
@@ -34,6 +37,14 @@ export const createNumberValidator = (
   if (options?.max)
     validator = validator.max(options.max, {
       message: `${name} must be at most ${options.max}`,
+    });
+  if (options?.isInt)
+    validator = validator.int({
+      message: `${name} must be an integer`,
+    });
+  if (options?.isPositive)
+    validator = validator.positive({
+      message: `${name} must be a positive number`,
     });
   return validator;
 };
@@ -55,7 +66,7 @@ export const createBooleanValidator = (name: string) => {
 export const createArrayValidator = <T>(
   name: string,
   itemSchema: z.ZodType<T>,
-  options?: { minLength?: number; maxLength?: number },
+  options?: { minLength?: number; maxLength?: number }
 ) => {
   let validator = z.array(itemSchema, {
     invalid_type_error: `${name} must be an array`,
@@ -72,13 +83,10 @@ export const createArrayValidator = <T>(
   return validator;
 };
 
-export const createPasswordValidator = (
-  name: string,
-  options?: { minLength?: number; maxLength?: number },
-) => {
+export const createPasswordValidator = (name: string, options?: { minLength?: number; maxLength?: number }) => {
   const validator = createStringValidator(name, options);
   return validator.regex(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    'Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character',
+    "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character"
   );
 };

@@ -1,17 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserBodyDto, ListUsersQueryDto } from './components/users.types';
-import crypto from 'crypto';
+import { Injectable } from "@nestjs/common";
+import { CreateUserBodyDto, ListUsersQueryDto, ResetUserPasswordBodyDto } from "./components/users.types";
+import crypto from "crypto";
 
 @Injectable()
 export class UsersService {
   createUser(body: CreateUserBodyDto) {
+    console.log(body);
     const userId = crypto.randomUUID();
-  },
-  listUsers(quries: ListUsersQueryDto) {
+  }
+  listUsers(queries: ListUsersQueryDto) {
+    console.log(queries);
     return [
-      { id: 1, name: 'John Doe' },
-      { id: 2, name: 'Alice Caeiro' },
-      { id: 3, name: 'Who Knows' },
+      { id: 1, name: "John Doe" },
+      { id: 2, name: "Alice Caeiro" },
+      { id: 3, name: "Who Knows" },
     ];
+  }
+  resetUserPassword(body: ResetUserPasswordBodyDto) {
+    console.log(body);
+    return "Reset user password";
   }
 }
