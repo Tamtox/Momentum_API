@@ -7,7 +7,7 @@ import {
   SignInBodyDto,
   SignUpBodyDto,
   UpdateUserBodyDto,
-} from "./components/users.types";
+} from "./dto/users";
 
 @Controller("users")
 export class UsersController {

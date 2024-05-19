@@ -4,7 +4,7 @@ import {
   createPasswordValidator,
   createStringValidator,
   createUUIDValidator,
-} from "src/common/zod/zod_validators";
+} from "src/utility/zod/zod_validators";
 import { z } from "zod";
 
 // Sign Up --------------------------------------------------------------------------------------------------------------------
@@ -115,10 +115,10 @@ export const listUsersDto = z.object(
     username: createStringValidator("Username").optional(),
     page: createNumberValidator("Page", { min: 1, isInt: true, isPositive: true }).optional(),
     pageSize: createNumberValidator("Page Size", { min: 1, isInt: true, isPositive: true }).optional(),
-    created_date_start: createDateTimeValidator("Created Date Start").optional(),
-    created_date_end: createDateTimeValidator("Created Date End").optional(),
-    updated_date_start: createDateTimeValidator("Updated Date Start").optional(),
-    updated_date_end: createDateTimeValidator("Updated Date End").optional(),
+    createdDateStart: createDateTimeValidator("Created Date Start").optional(),
+    createdDateEnd: createDateTimeValidator("Created Date End").optional(),
+    updatedDateStart: createDateTimeValidator("Updated Date Start").optional(),
+    updatedDateEnd: createDateTimeValidator("Updated Date End").optional(),
   },
   {
     invalid_type_error: "List Users query should be an object",

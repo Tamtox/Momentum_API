@@ -90,3 +90,18 @@ export const createPasswordValidator = (name: string, options?: { minLength?: nu
     "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character"
   );
 };
+
+function maxProfit(prices: number[]): number {
+  let max = 0;
+  let ptr = 0;
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] < prices[ptr]) {
+      ptr = i;
+    } else {
+      if (prices[i] - prices[ptr] > max) {
+        max = prices[i] - prices[ptr];
+      }
+    }
+  }
+  return max;
+}

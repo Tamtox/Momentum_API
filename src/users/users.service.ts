@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { CreateUserBodyDto, ListUsersQueryDto, ResetUserPasswordBodyDto } from "./components/users.types";
+import { CreateUserBodyDto, ListUsersQueryDto, ResetUserPasswordBodyDto } from "./dto/users";
 import crypto from "crypto";
 
 @Injectable()
